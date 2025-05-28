@@ -28,9 +28,6 @@
 - [The Coding Train](https://www.youtube.com/@TheCodingTrain)
 - [Школа програмування](https://www.youtube.com/@ProgerSchool)
 - [Code with Ania](https://www.youtube.com/@AniaKubow)
-- [Гоша Дударь](https://www.youtube.com/c/gosha_dudar)
-- [Владилен Минин](https://www.youtube.com/@VladilenMinin)
-- [АйТиБорода](https://www.youtube.com/@itbeard)
 
 ---
 
