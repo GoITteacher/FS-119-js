@@ -3,12 +3,13 @@
  *
  * - Звернення до змінної до її оголошення
  * - Перевизначення значення для змінної оголошеної через const
- * - Обращение по неправильному імени змінної
+ * - Звернення за неправильним імям змінної
  *
  */
 
-const username = "Mango";
+// let username = 'Mango';
+// username = 25;
 
-let age = 20;
+// const userName = 'Volodka';
 
-const price = 200;
+// console.log(userName);
