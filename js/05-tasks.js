@@ -2,9 +2,22 @@
  * Напиши скрипт, який підраховує суму всіх парних чисел у масиві.
  */
 
-const numbers = [1, 5, 8, 9, 12, 4, 15, 27, 30, 18, 14];
-let total = 0;
+const numbers = [1, 5, 8];
 
+function task1(arr) {
+  let total = 0;
+
+  for (const item of arr) {
+    if (item % 2 === 0) {
+      total += item;
+    }
+  }
+
+  return total;
+}
+
+// console.log(task1(numbers));
+//!======================================================
 /**
  * Напиши скрипт, який виводить у консоль ім'я та телефонний номер користувача.
  * У змінних names та phones зберігаються рядки імен та телефонних номерів,
@@ -12,9 +25,20 @@ let total = 0;
  * відповідність. Кількість імен та телефонів гарантовано однакова.
  */
 
-const names = "Jacob,William,Solomon,Artemis";
-const phones = "89001234567,89001112233,890055566377,890055566300";
+// const names = 'Jacob,William,Solomon,Artemis';
+// const phones = '89001234567,89001112233,890055566377,890055566300';
 
+// function task2(names, phones) {
+//   const arr1 = names.split(',');
+//   const arr2 = phones.split(',');
+
+//   for (let i = 0; i < arr1.length; i++) {
+//     console.log(`${arr1[i]}: ${arr2[i]}`);
+//   }
+// }
+
+// task2(names, phones);
+//!======================================================
 /**
  * Напиши скрипт, який виводить у консоль усі слова рядка
  * крім першого і останнього. Результуючий рядок не повинен починатися
@@ -22,13 +46,28 @@ const phones = "89001234567,89001112233,890055566377,890055566300";
  * Скрипт повинен працювати для будь-якого рядка.
  */
 
-const string = "Welcome to the future";
+// const string = 'Welcome to the future';
+// const arr = string.split(' ');
 
+// arr.pop();
+// arr.shift();
+
+// const str2 = arr.slice(1, -1).join(' ');
+
+// console.log(str2);
+//!======================================================
 /**
  * Напиши скрипт пошуку найменшого числа у масиві. Код повинен працювати
  * для будь-якого масиву чисел. Використовуй цикл для розв'язання задачі.
  */
 
 const values = [2, 17, 94, 1, 23, 37];
-let min;
-console.log(min); // 1
+let min = values[0]; // 1
+
+for (const item of values) {
+  if (item < min) {
+    min = item;
+  }
+}
+
+console.log(min);

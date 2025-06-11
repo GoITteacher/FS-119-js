@@ -5,18 +5,22 @@
  * Посилальна рівність (referential equality)
  */
 
-const a = [1, 2, 3];
-const b = a;
+// const arr = [10, 20, 30];
+//!======================================================
+// const x = ['1.pdf', '2.pdf', '3.pdf'];
+// const y = x;
 
-console.log("a", a);
-console.log("b", b);
+// y[0] = 'newFile.pdf';
 
-a[0] = 500;
+// console.log(x);
+// console.log(y);
 
-console.log("a", a);
-console.log("b", b);
+// console.log(x === y);
 
-console.log(a === b);
+//!======================================================
 
-console.log([] === []);
-console.log([1, 2, 3] === [1, 2, 3]);
+// const x = [1, 2, 3];
+// const y = [1, 2, 3];
+// console.log(x === y);
+
+//!======================================================

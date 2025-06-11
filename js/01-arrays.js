@@ -8,19 +8,31 @@
  * - Індекс останнього елемента
  * - Перевизначення
  */
+//!======================================================
+// const users = ['Vasya', 'Kolya', 'Petya'];
 
-const courses = ["HTML", "CSS", "JavaScript", "React", "PostgreSQL"];
-console.table(courses);
-console.log([0]);
-console.log([1]);
-console.log([2]);
-console.log([3]);
+// console.log(users[0]);
+// console.log(users[1]);
+// console.log(users[2]);
 
-courses[1] = "Jacob";
-courses[3] = "Adrian";
-console.table(courses);
+// users[0] = 'Anton';
 
-console.log(courses.length);
+// console.log(users);
 
-const lastIndex = courses.length - 1;
-console.log(lastIndex);
+//!======================================================
+
+// const prices = [100, 200, 300, 400, 500];
+
+// prices[0] += 50;
+
+// console.table(prices);
+
+//!======================================================
+
+// const array = [10, 20, 40, 60, 4, 1, 24, 5];
+
+// console.log(array.length);
+
+// console.log(array[array.length - 1]);
+
+//!======================================================
