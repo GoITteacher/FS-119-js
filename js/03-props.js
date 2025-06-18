@@ -4,22 +4,42 @@
  * - Короткі властивості
  * - Обчислювальні властивості
  */
+// const balance = 250;
 
-const username = "Mango";
-const email = "mango@mail.com";
+//!======================================================
+// function createUser() {
+//   const username = prompt('Enter username');
+//   const age = prompt('Enter age');
+//   const phoneNumber = prompt('Enter phoneNumber');
+//   const userCity = prompt('Enter city');
 
-const credentials = {};
+//   const user = { username: username, age: age };
 
-console.log(credentials);
-console.log(credentials.username);
-console.log(credentials.email);
+//   console.log(user);
+// }
 
-/**
- * -------------------------
- */
+// createUser();
 
-const inputName = "color";
+//!======================================================
 
-const colorPickerData = {};
+// const inputName = 'color';
 
-console.log(colorPickerData);
+// const colorPickerData = {};
+
+// console.log(colorPickerData);
+
+//!======================================================
+
+// const prefix = '$';
+
+// const obj = {
+//   ['name'.toUpperCase()]: 'Volodka',
+//   [prefix + 'age']: 12,
+//   [prefix + 'city']: 'Dnipro',
+//   [prefix + 'country']: 'Ukraine',
+//   [10 * 10 - 25]: 'Ukraine',
+// };
+
+// console.log(obj);
+
+//!======================================================
