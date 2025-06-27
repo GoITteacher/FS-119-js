@@ -4,6 +4,7 @@
  * - Не змінює оригінальний масив
  * - Повертає новий масив такої ж довжини
  */
+//!======================================================
 
 const allCars = [
   { make: 'Honda', model: 'CR-V', amount: 14, price: 24045 },
@@ -18,39 +19,113 @@ const allCars = [
   { make: 'Ford', model: 'Explorer', amount: 6, price: 31660 },
 ];
 
+// const carsWithDiscount = allCars.map(car => {
+//   const copy = { ...car };
+//   copy.priceWithDiscount = copy.price * 0.95;
+//   return copy;
+// });
+
+// const carsWithDiscount = allCars.map(car => {
+//   const copy = {
+//     make: car.make,
+//     model: car.model,
+//   };
+//   return copy;
+// });
+
+// console.table(allCars);
+// console.table(carsWithDiscount);
+
+// const res = allCars.map((car, idx) => {
+//   const str = `<li>
+//         <p>${car.make} ${car.model}</p>
+//         <p>Price: ${car.price}</p>
+//       </li>`;
+//   return str;
+// });
+
+// const markup = res.join('');
+// console.log(markup);
+
+//!======================================================
+
+// const friends = ['Roman', 'Mila', 'Valera', 'Vasya'];
+
+// ['Hello roman']
+// const messages = friends.map(name => {
+//   return `Hello ${name}`;
+// });
+
+// console.log(messages);
+
+//!======================================================
+// const arr = [1, 2, 3, 4, 5, 5, 1];
+
+// [2, 4, 6,8,10,10,2]
+// const res = arr.map((value, index, array) => {
+//   return value * 2;
+// });
+// [2, 4, 6,8,10,10,2]
+
+// const res = arr.map((value, index, array) => {
+//   return value - 10;
+// });
+
+//!======================================================
+
 /**
  * Нехай функція getModels повертає масив моделей (поле model) всіх автомобілів.
  */
 
-const getModels = cars => {};
+// const getModels = cars => {
+//   const models = cars.map(car => car.model);
+//   return models;
+// };
 
-console.table(getModels(allCars));
+// console.table(getModels(allCars));
 
 /**
  * Нехай функція makeCarsWithDiscount повертає новий масив об'єктів із змінним
  * значенням властивості price залежно від переданої знижки.
  */
 
-const makeCarsWithDiscount = (cars, discount) => {};
+// const makeCarsWithDiscount = (cars, discount) => {
+//   const result = cars.map(car => {
+//     const value = car.price * discount;
+//     const copy = { ...car };
+//     copy.price -= value;
+//     return copy;
+//   });
 
-console.table(makeCarsWithDiscount(allCars, 0.2));
-console.table(makeCarsWithDiscount(allCars, 0.4));
+//   return result;
+// };
 
-const players = [
-  { id: 'player-1', name: 'Mango', timePlayed: 310, points: 54, online: false },
-  { id: 'player-2', name: 'Poly', timePlayed: 470, points: 92, online: true },
-  { id: 'player-3', name: 'Kiwi', timePlayed: 230, points: 48, online: true },
-  { id: 'player-4', name: 'Ajax', timePlayed: 150, points: 71, online: false },
-  { id: 'player-5', name: 'Chelsy', timePlayed: 80, points: 48, online: true },
-];
-console.table(players);
+// console.table(makeCarsWithDiscount(allCars, 0.2));
+// console.table(makeCarsWithDiscount(allCars, 0.4));
+
+// const players = [
+//   { id: 'player-1', name: 'Mango', timePlayed: 310, points: 54, online: false },
+//   { id: 'player-2', name: 'Poly', timePlayed: 470, points: 92, online: true },
+//   { id: 'player-3', name: 'Kiwi', timePlayed: 230, points: 48, online: true },
+//   { id: 'player-4', name: 'Ajax', timePlayed: 150, points: 71, online: false },
+//   { id: 'player-5', name: 'Chelsy', timePlayed: 80, points: 48, online: true },
+// ];
+// console.table(players);
 
 /*
  * Збільшуємо кількість годин гравця за id
  */
 
-const playerIdToUpdate = 'player-3';
+// const playerIdToUpdate = 'player-3';
 
-const updatedPlayers = players.map(player => {});
+// const updatedPlayers = players.map(player => {
+//   const copy = {...player};
 
-console.log(updatedPlayers);
+//   if(copy.id === playerIdToUpdate){
+//     copy.timePlayed += 10;
+//   }
+
+//   return copy;
+// });
+
+// console.log(updatedPlayers);
