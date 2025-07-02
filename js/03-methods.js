@@ -5,85 +5,113 @@
  * - Метод apply
  * - Метод bind
  */
+//!======================================================
 
-const showThis = function (a, b, arr) {
-  console.log(a, b, arr);
-  console.log("showThis -> this", this);
-};
+// const user1 = {
+//   name: 'Vasya',
+//   showName(r, g, b) {
+//     console.log(this, r, g, b);
+//   },
+// };
 
-showThis();
+// const user2 = {
+//   name: 'Petya',
+// };
 
-const objA = {
-  a: 5,
-  b: 10,
-};
+// const red = 10;
+// const green = 30;
+// const blue = 20;
 
-showThis.call(objA, 5, 1, [100, 200, 300]);
-showThis.apply(objA, [5, 1, [100, 200, 300]]);
+// const rgb = [10,20,30];
 
-const objB = {
-  x: 788,
-  y: 25,
-};
+// user1.showName.call(user2, red);
+// user1.showName.apply(user2, rgb);
 
-showThis.call(objB, 1, 1, 2);
-showThis.apply(objB, [1, 1, 2]);
+// user1.showName(10,20,30);
 
-showThis();
+//!======================================================
 
-/**
- * -------------------------------
- */
+// 1 - undefined
+// 3 - object
+// 7 - call/apply
+// 9 - bind
+// 11 - arrow function
+
+//!======================================================
 const changeColor = function (color) {
-  console.log("changeColor -> this", this);
   this.color = color;
+  console.log(`new color - ${color} for ${this.name}`);
 };
 
 const hat = {
-  color: "black",
+  name: 'hat',
+  color: 'black',
 };
-
-changeColor.call(hat, "orange");
-console.log(hat);
 
 const sweater = {
-  color: "green",
+  name: 'sweater',
+  color: 'green',
 };
 
-changeColor.call(sweater, "blue");
-console.log(sweater);
-
-/**
- * -------------------------------
- */
 const changeHatColor = changeColor.bind(hat);
 const changeSweaterColor = changeColor.bind(sweater);
 
-changeHatColor("yellow");
-console.log(hat);
+// changeHatColor();
+// changeSweaterColor('green');
 
-changeSweaterColor("red");
-console.log(sweater);
+// const copy = changeHatColor.bind(sweater);
 
-/**
- * -------------------------------
- */
+//!======================================================
+
 const counter = {
   value: 0,
   increment(value) {
-    console.log("increment -> this", this);
     this.value += value;
+    console.log('increment -> this', this);
   },
   decrement(value) {
-    console.log("decrement -> this", this);
+    console.log('decrement -> this', this);
     this.value -= value;
   },
 };
 
-const updateCounter = function (value, operation) {
-  operation(value);
-};
+// const incrementCounter = counter.increment.bind(counter);
 
-updateCounter(10, counter.increment.bind(counter));
-updateCounter(5, counter.decrement.bind(counter));
-console.log(counter);
+// incrementCounter(25);
+
+//!======================================================
+
+// const x = 25;
+
+//!======================================================
+
+/* 
+1. Визначити тип функції
+  - якщо звичайна - подивитись момент виклику
+  - якщо стрілчата то взяти this від батьківської функції
+*/
+
+// function foo() {
+//   const foo1 = () => {
+//     const foo2 = () => {
+//       const foo3 = () => {
+//         const foo4 = () => {
+//           // this = { name: 'mango' }
+//           console.log(this);
+//         };
+
+//         foo4();
+//       };
+
+//       foo3();
+//     };
+
+//     foo2();
+//   };
+
+//   foo1();
+// }
+
+// foo.call({ name: 'mango' });
+
+//!======================================================
