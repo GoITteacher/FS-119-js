@@ -74,3 +74,43 @@ body {
 .deposit {
   background-color: rgba(157, 255, 157, 0.429);
 }
+
+.list {
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid black;
+  width: 300px;
+  padding: 0;
+}
+
+.active-item {
+  width: 300px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+}
+
+.color-picker {
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.color-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: fit-content;
+  margin: 10px;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-item p {
+  margin: 2px;
+}

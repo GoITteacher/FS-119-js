@@ -92,3 +92,27 @@ const transactionHistory = [
 ];
 
 const tableEl = document.querySelector('.js-transaction-table');
+
+//!======================================================
+
+function transactionTemplate(item) {
+  return `<tr class="table-item deposit">
+          <td>${item.id.slice(0, 5)}...</td>
+          <td>${item.amount}</td>
+          <td>${item.date.split('T')[0]}</td>
+          <td>${item.business}</td>
+          <td>${item.name}</td>
+          <td>${item.type}</td>
+          <td>${item.account}</td>
+        </tr>`;
+}
+
+function transactionsTemplate(arr) {
+  return arr.map(transactionTemplate).join('');
+}
+
+const markup = transactionsTemplate(transactionHistory);
+
+tableEl.lastElementChild.innerHTML = markup;
+
+//!======================================================
