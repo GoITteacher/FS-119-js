@@ -82,3 +82,32 @@ form {
   padding: 5px;
   width: 300px;
 }
+
+.box {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+}
+
+.valid-input {
+  background-color: green;
+}
+
+.invalid-input {
+  background-color: red;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
+}
+
+.item-list li {
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 15px;
+}
