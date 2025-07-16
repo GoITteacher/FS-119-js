@@ -1,5 +1,5 @@
 let colorPalette = [];
-const LENGTH = 5;
+const LENGTH = 9;
 
 function createPaletteItems() {
   const items = [];
@@ -34,7 +34,7 @@ function hexToRgb(hex) {
 }
 
 createPaletteItems();
-////////////////////////////////////////////////////////////////////////////
+//!======================================================
 
 const refs = {
   itemList: document.querySelector('.js-colors-box'),
@@ -43,17 +43,49 @@ const refs = {
   backdropElem: document.querySelector('.js-backdrop'),
 };
 
-////////////////////////////////////////////////////////////////////////////
+console.log(colorPalette);
 
-/* 
-nodeName
-<li class="color-item">
-    <button class="color-body" style="background-color:...;"></button>
-    <div class="color-footer">
-        <div>HEX: ....</div>
-        <div>RGB: ....</div>
-        <div></div>
-    </div>
-</li>
+//!======================================================
 
-*/
+function colorTemplate(item) {
+  return `<li class="color-item" data-color="${item.hex}">
+          <button class="color-body" style="background-color: ${item.hex};"></button>
+          <div class="color-footer">
+            <div>HEX: ${item.hex}</div>
+            <div>RGB: ${item.rgb}</div>
+            <div></div>
+          </div>
+        </li>`;
+}
+
+function colorsTemplate(items) {
+  return items.map(colorTemplate).join('\n');
+}
+
+refs.btnReloadColor.addEventListener('click', () => {
+  createPaletteItems();
+  const markup = colorsTemplate(colorPalette);
+  refs.itemList.innerHTML = markup;
+});
+
+//!======================================================
+
+refs.itemList.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  const activeElem = refs.itemList.querySelector('.active');
+  if (activeElem) {
+    activeElem.classList.toggle('active');
+  }
+
+  const liElem = e.target.closest('li');
+  liElem.classList.toggle('active');
+
+  console.log(liElem);
+  console.log(liElem.dataset);
+
+  const color = liElem.dataset.color;
+  document.body.style.backgroundColor = color;
+});

@@ -43,4 +43,56 @@ const products = [
   },
 ];
 
-const container = document.querySelector('.products');
+const refs = {
+  container: document.querySelector('.products'),
+};
+
+//!======================================================
+
+function productTemplate(product) {
+  return `<li class="item">
+        <img
+          src="${product.img}"
+          alt="${product.name}"
+        />
+        <h2>${product.name}</h2>
+        <button data-product-id="${product.id}">Show Info</button>
+      </li>`;
+}
+
+function productsTemplate(products) {
+  return products.map(productTemplate).join('');
+}
+
+const markup = productsTemplate(products);
+refs.container.innerHTML = markup;
+
+//!======================================================
+
+function openModal(product) {
+  const instance = basicLightbox.create(
+    `<div class="modal">
+      <img src="${product.img}" alt="" />
+      <h2>${product.name}</h2>
+      <p>Price: ${product.price}</p>
+      <p>${product.description}</p>
+    </div>
+`,
+  );
+
+  instance.show();
+}
+
+//!======================================================
+
+refs.container.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') return;
+
+  const productId = e.target.dataset.productId;
+
+  const productInfo = products.find(el => {
+    return el.id == productId;
+  });
+
+  openModal(productInfo);
+});
