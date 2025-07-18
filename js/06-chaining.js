@@ -105,6 +105,11 @@ const allCars = [
     onSale: false,
   },
 ];
+
+const newArr = allCars.map(({ make, model }) => {
+  const newObj = { make, model };
+  return newObj;
+});
 //!======================================================
 
 // const res = allCars
