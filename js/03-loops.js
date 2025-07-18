@@ -4,15 +4,20 @@
 
 const users = [
   {
-    name: "Kate",
+    name: 'Kate',
+    age: 12,
   },
   {
-    name: "Alex",
+    name: 'Alex',
+    age: 25,
   },
   {
-    name: "Mark",
+    name: 'Mark',
+    age: 31,
   },
 ];
+
+const res = users.filter(({ age }) => age > 20);
 
 /**
  * Без деструктуризації
