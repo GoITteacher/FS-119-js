@@ -2,34 +2,126 @@
  * Деструктуризація об'єкта в циклі
  */
 
-const users = [
+// const users = [
+//   {
+//     name: 'Kate',
+//     age: 12,
+//   },
+//   {
+//     name: 'Alex',
+//     age: 25,
+//   },
+//   {
+//     name: 'Mark',
+//     age: 31,
+//   },
+// ];
+
+// const res = users.filter(({ age }) => age > 20);
+
+//!======================================================
+
+const allCars = [
   {
-    name: 'Kate',
-    age: 12,
+    make: 'Honda',
+    model: 'CR-V',
+    type: 'suv',
+    amount: 14,
+    price: 24045,
+    onSale: true,
   },
   {
-    name: 'Alex',
-    age: 25,
+    make: 'Honda',
+    model: 'Accord',
+    type: 'sedan',
+    amount: 2,
+    price: 22455,
+    onSale: true,
   },
   {
-    name: 'Mark',
-    age: 31,
+    make: 'Mazda',
+    model: 'Mazda 6',
+    type: 'sedan',
+    amount: 8,
+    price: 24195,
+    onSale: false,
+  },
+  {
+    make: 'Mazda',
+    model: 'CX-9',
+    type: 'suv',
+    amount: 7,
+    price: 31520,
+    onSale: true,
+  },
+  {
+    make: 'Toyota',
+    model: '4Runner',
+    type: 'suv',
+    amount: 19,
+    price: 34210,
+    onSale: false,
+  },
+  {
+    make: 'Toyota',
+    model: 'Sequoia',
+    type: 'suv',
+    amount: 16,
+    price: 45560,
+    onSale: false,
+  },
+  {
+    make: 'Toyota',
+    model: 'Tacoma',
+    type: 'truck',
+    amount: 4,
+    price: 24320,
+    onSale: true,
+  },
+  {
+    make: 'Ford',
+    model: 'F-150',
+    type: 'truck',
+    amount: 11,
+    price: 27110,
+    onSale: true,
+  },
+  {
+    make: 'Ford',
+    model: 'Fusion',
+    type: 'sedan',
+    amount: 13,
+    price: 22120,
+    onSale: true,
+  },
+  {
+    make: 'Ford',
+    model: 'Explorer',
+    type: 'suv',
+    amount: 6,
+    price: 31660,
+    onSale: false,
   },
 ];
 
-const res = users.filter(({ age }) => age > 20);
+// for (const { model } of allCars) {
+//   console.log(model);
+// }
 
-/**
- * Без деструктуризації
- */
-const names = [];
+//!======================================================
+// const car = {
+//   make: 'Ford',
+//   model: 'Explorer',
+//   type: 'suv',
+//   amount: 6,
+//   price: 31660,
+//   onSale: false,
+// };
 
-for (const user of users) {
-  names.push(user.name);
-}
+// const entries = Object.entries(car);
 
-console.log(names);
+// for (const [x1, x2] of entries) {
+//   console.log(x1, x2);
+// }
 
-/**
- * З деструктуризацією
- */
+//!======================================================
