@@ -3,8 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "start": "",
-    "dev": "vite",
+    "start": "vite",
     "build": "vite build --base=/test/",
     "preview": "vite preview",
     "push": "git add .; git commit -m 'update'; git push;"
@@ -24,6 +23,9 @@
     "vite": "^4.5.14"
   },
   "dependencies": {
+    "basiclightbox": "^5.0.4",
+    "simplelightbox": "^2.14.3",
+    "toastify": "^2.0.1",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   },
