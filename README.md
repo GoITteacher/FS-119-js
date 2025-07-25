@@ -4,8 +4,9 @@
 
 2. Розберемо:
 
-- terminal
+- terminal +
 - node-js / CLI
+
 - npm
 
   - init
