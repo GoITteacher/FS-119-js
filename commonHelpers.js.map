@@ -1,0 +1,1 @@
+{"version":3,"file":"commonHelpers.js","sources":["../src/index.js"],"sourcesContent":["class User {\n  name;\n}\n\nconst x = () => {\n  console.log('hello');\n};\n\nx();\n"],"names":["x"],"mappings":"ssBAIA,MAAMA,EAAI,IAAM,CACd,QAAQ,IAAI,OAAO,CACrB,EAEAA,EAAG"}
