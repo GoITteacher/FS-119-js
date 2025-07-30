@@ -108,3 +108,10 @@ stopBtn.addEventListener('click', () => {
   clearInterval(intervalId);
   intervalId = null;
 });
+
+// "Не розумію чому у прикладах 1-3 друга година:
+// console.log(new Date(""2030"")); // ""Tue Jan 01 2030 02:00:00 GMT+0200""
+// console.log(new Date(""2030-03"")); // ""Fri Mar 01 2030 02:00:00 GMT+0200""
+// console.log(new Date(""2030-03-16"")); // ""Sat Mar 16 2030 02:00:00 GMT+0200""
+// console.log(new Date(""2030-03-16T14:25:00"")); // ""Sat Mar 16 2030 14:25:00 GMT+0200""
+// "
