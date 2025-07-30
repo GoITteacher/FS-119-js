@@ -1,55 +1,110 @@
-/**
- * Напишемо клас Timer, який буде
- * запускати та зупиняти відлік часу
- */
+const startBtn = document.querySelector('button[data-action-start]');
+const stopBtn = document.querySelector('button[data-action-stop]');
+const clockface = document.querySelector('.js-clockface');
+//!======================================================
 
-class Timer {
-  constructor() {}
+// const timer = {
+//   intervalId: null,
+//   initTime: null,
 
-  start() {}
+//   start() {
+//     console.log(this.intervalId);
 
-  stop() {}
+//     if (this.intervalId) {
+//       console.log('Таймер вже існує');
+//       return;
+//     }
 
-  /*
-   * - Приймає час в мілісекундах
-   * - Вираховує скільки в них вміщається годин/хвилин/секунд
-   * - Повертає об'єкт з властивостями hours, mins, secs
-   * - Адська копіпаста з stackoverflow 💩
-   */
-  getTimeComponents(time) {
-    const hours = this.pad(
-      Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    );
-    const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-    const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+//     console.log('Таймер запущено');
+//     this.initTime = Date.now();
+//     this.intervalId = setInterval(() => {
+//       this.tick();
+//     }, 1000);
+//   },
 
-    return { hours, mins, secs };
-  }
+//   stop() {
+//     clearInterval(this.intervalId);
+//     this.intervalId = null;
+//     console.log('Таймер зупинено');
+//   },
 
-  /*
-   * Приймає число, перетворює його в рядок і додає в початок 0, якщо число менше 2-х знаків
-   */
-  pad(value) {
-    return String(value).padStart(2, "0");
-  }
+//   tick() {
+//     const currentTime = Date.now();
+
+//     const diff = currentTime - this.initTime;
+
+//     const timeObj = getTimeComponents(diff);
+//     const timeStr = time2Str(timeObj);
+
+//     clockface.textContent = timeStr;
+//   },
+// };
+
+// startBtn.addEventListener('click', () => {
+//   timer.start();
+// });
+
+// stopBtn.addEventListener('click', () => {
+//   timer.stop();
+// });
+
+// function getTimeComponents(time) {
+//   const hours = pad(
+//     Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+//   );
+//   const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+//   const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
+
+//   return { hours, mins, secs };
+// }
+
+// function time2Str({ hours, mins, secs }) {
+//   const hoursStr = pad(hours);
+//   const minsStr = pad(mins);
+//   const secsStr = pad(secs);
+
+//   return `${hoursStr}:${minsStr}:${secsStr}`;
+// }
+
+function pad(value) {
+  return String(value).padStart(2, '0');
 }
 
-const startBtn = document.querySelector("button[data-action-start]");
-const stopBtn = document.querySelector("button[data-action-stop]");
-const clockface = document.querySelector(".js-clockface");
+function ms2str(time) {
+  const hours = pad(
+    Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+  );
+  const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+  const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
 
-const timer = new Timer({
-  onTick: updateClockface,
+  const hoursStr = pad(hours);
+  const minsStr = pad(mins);
+  const secsStr = pad(secs);
+
+  return `${hoursStr}:${minsStr}:${secsStr}`;
+}
+
+// //!======================================================
+
+let intervalId;
+let initTime = new Date();
+
+startBtn.addEventListener('click', () => {
+  if (intervalId) return;
+
+  intervalId = setInterval(() => {
+    const currentTime = Date.now();
+    const diff = initTime - currentTime;
+    const str = ms2str(diff);
+    clockface.textContent = str;
+
+    if (diff < 1000) {
+      clearInterval(intervalId);
+    }
+  }, 1000);
 });
 
-// startBtn.addEventListener("click", timer.start.bind(timer));
-// stopBtn.addEventListener("click", timer.stop.bind(timer));
-
-/*
- * - Приймає час в мілісекундах
- * - Вираховує скільки в них вміщається годин/хвилин/секунд
- * - Рисує інтерфейс
- */
-function updateClockface({ hours, mins, secs }) {
-  clockface.textContent = `${hours}:${mins}:${secs}`;
-}
+stopBtn.addEventListener('click', () => {
+  clearInterval(intervalId);
+  intervalId = null;
+});
