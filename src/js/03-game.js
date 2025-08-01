@@ -23,3 +23,46 @@
 const startBtn = document.querySelector('.start-btn');
 const container = document.querySelector('.container');
 const result = document.querySelector('.result');
+
+function createPromise(delay) {
+  const randomSmile = new Promise((res, rej) => {
+    const isPositiveSmile = Math.random() > 0.5;
+    setTimeout(() => {
+      if (isPositiveSmile) {
+        res('🤑');
+      } else {
+        rej('👿');
+      }
+    }, delay);
+  });
+  return randomSmile;
+}
+
+startBtn.addEventListener('click', () => {
+  const promises = [];
+
+  for (let i = 0; i < 3; i++) {
+    container.children[i].textContent = '';
+
+    const smile = createPromise((i + 1) * 300);
+
+    promises.push(smile);
+
+    smile
+      .then(res => {
+        container.children[i].textContent = res;
+      })
+      .catch(res => {
+        container.children[i].textContent = res;
+      });
+  }
+
+  Promise.allSettled(promises).then(res => {
+    const isLooser = res.some(el => el.status === 'rejected');
+    result.textContent = isLooser
+      ? 'Ви програли((( Але наступного разу вам ТОЧНО ПОВЕЗЕ!!!'
+      : 'Ви перемогли, вітаємо!';
+  });
+});
+
+console.log(container.children[2]);
