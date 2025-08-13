@@ -69,3 +69,41 @@
   margin: 0 auto;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  display: inline-grid;
+  width: 80px;
+  aspect-ratio: 1;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  grid-area: 1/1;
+  border-radius: 50%;
+}
+.loader:before {
+  margin: 25%;
+  background: repeating-conic-gradient(#c02942 0 60deg, #0b486b 0 120deg);
+  transform: rotate(0turn) translate(50%) rotate(0turn);
+  animation: l1 3s linear infinite;
+}
+.loader:after {
+  padding: 10%;
+  margin: -10%;
+  background: repeating-conic-gradient(
+    from -15deg,
+    #c02942 0 30deg,
+    #0b486b 0 60deg
+  );
+  mask: conic-gradient(#000 0 0) content-box exclude, conic-gradient(#000 0 0);
+}
+@keyframes l1 {
+  to {
+    transform: rotate(1turn) translate(50%) rotate(-2turn);
+  }
+}
+
+.hidden {
+  display: none;
+}
