@@ -62,3 +62,8 @@ export class BooksAPI {
     return fetch(url, options).then(res => res.json());
   }
 }
+
+export function getBooks() {
+  const url = this.BASE_URL + this.END_POINT;
+  return fetch(url).then(res => res.json());
+}
