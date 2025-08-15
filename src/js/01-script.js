@@ -1,105 +1,99 @@
 import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import 'izitoast/dist/css/iziToast.css';
 
-import { fetchArticles } from './modules/newsAPI.js';
-import { articlesTemplate } from './templates/render-functions.js';
+import { fetchNews } from './modules/newsAPI';
+import { articlesTemplate } from './templates/render-function1';
 
 const refs = {
-  formElem: document.querySelector('.js-search-form'),
-  articleListElem: document.querySelector('.js-article-list'),
-  btnLoadMore: document.querySelector('.js-btn-load'),
-  loadElem: document.querySelector('.js-loader'),
+  formEl: document.querySelector('.js-search-form'),
+  ulElem: document.querySelector('.js-article-list'),
+  loadMoreBtn: document.querySelector('.js-btn-load'),
 };
 
-// ======================================
-let query;
-let page;
-let maxPage;
+//!======================================================
 
-refs.formElem.addEventListener('submit', onFormSubmit);
-refs.btnLoadMore.addEventListener('click', onLoadMoreClick);
+let userValue;
+let currentPage;
+let maxPage = 0;
+const PAGE_SIZE = 10;
 
-// ======================================
+//!======================================================
 
-async function onFormSubmit(e) {
+refs.formEl.addEventListener('submit', async e => {
   e.preventDefault();
-  query = e.target.elements.query.value.trim();
-  page = 1;
 
-  if (!query) {
-    showError('Empty field');
-    return;
+  userValue = e.target.elements.query.value.trim();
+  currentPage = 1;
+
+  if (!userValue) {
+    return iziToast.error({});
   }
-
-  showLoader();
 
   try {
-    const data = await fetchArticles(query, page);
-    if (data.totalResults === 0) {
-      showError('Sorry!');
-    }
-    maxPage = Math.ceil(data.totalResults / 15);
-    refs.articleListElem.innerHTML = '';
-    renderArticles(data.articles);
-  } catch (err) {
-    console.log(err);
-    showError(err);
+    const res = await fetchNews(userValue, currentPage);
+    const markup = articlesTemplate(res.articles);
+    refs.ulElem.innerHTML = markup;
+
+    maxPage = Math.ceil(res.totalResults / PAGE_SIZE);
+  } catch {
+    maxPage = 0;
+    iziToast.error({ message: 'ERROR' });
   }
 
-  hideLoader();
   checkBtnVisibleStatus();
+  showNotification();
+
   e.target.reset();
-}
+});
 
-async function onLoadMoreClick() {
-  page += 1;
-  showLoader();
-  const data = await fetchArticles(query, page);
-  renderArticles(data.articles);
-  hideLoader();
+//!======================================================
+
+refs.loadMoreBtn.addEventListener('click', async () => {
+  currentPage += 1;
   checkBtnVisibleStatus();
+  showNotification();
 
-  const height =
-    refs.articleListElem.firstElementChild.getBoundingClientRect().height;
+  try {
+    const res = await fetchNews(userValue, currentPage);
+    const markup = articlesTemplate(res.articles);
+    refs.ulElem.insertAdjacentHTML('beforeend', markup);
+  } catch {
+    iziToast.error({ message: 'ERROR' });
+  }
+});
 
-  scrollBy({
-    behavior: 'smooth',
-    top: 10,
-  });
+//!======================================================
+
+function showLoadMore() {
+  refs.loadMoreBtn.classList.remove('hidden');
 }
 
-// ======================================
-function renderArticles(articles) {
-  const markup = articlesTemplate(articles);
-  refs.articleListElem.insertAdjacentHTML('beforeend', markup);
-}
-
-function showLoadBtn() {
-  refs.btnLoadMore.classList.remove('hidden');
-}
-function hideLoadBtn() {
-  refs.btnLoadMore.classList.add('hidden');
-}
-
-function showLoader() {
-  refs.loadElem.classList.remove('hidden');
-}
-function hideLoader() {
-  refs.loadElem.classList.add('hidden');
-}
-
-function showError(msg) {
-  iziToast.error({
-    title: 'Error',
-    message: msg,
-  });
+function hideLoadMore() {
+  refs.loadMoreBtn.classList.add('hidden');
 }
 
 function checkBtnVisibleStatus() {
-  if (page >= maxPage) {
-    hideLoadBtn();
+  console.log(currentPage, maxPage);
+
+  if (currentPage < maxPage) {
+    showLoadMore();
   } else {
-    showLoadBtn();
+    hideLoadMore();
   }
 }
-// ========================================
+
+function showNotification() {
+  if (currentPage === 1 && maxPage !== 0) {
+    iziToast.info({
+      message: `Max Page - ${maxPage}`,
+    });
+  } else if (maxPage === 0) {
+    iziToast.info({
+      message: `Нічого не знайдено`,
+    });
+  } else if (currentPage === maxPage) {
+    iziToast.info({
+      message: `Це остання сторінка`,
+    });
+  }
+}

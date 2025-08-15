@@ -1,17 +1,14 @@
 import axios from 'axios';
 
-export async function fetchArticles(query, currentPage) {
-  const API_KEY = 'c8747511a2c34730a83caaff4f3693e7';
-  const BASE_URL = 'https://newsapi.org/v2';
-  const END_POINT = '/everything';
-  const url = `${BASE_URL}${END_POINT}`;
+export async function fetchNews(userValue, currentPage) {
+  const baseUrl = 'https://newsapi.org/v2';
+  const endPoint = '/everything';
+  const url = baseUrl + endPoint;
 
   const params = {
-    apiKey: API_KEY,
-    language: 'en',
-    sortBy: 'popularity',
-    q: query,
-    pageSize: 15,
+    q: userValue,
+    apiKey: 'c8747511a2c34730a83caaff4f3693e7',
+    pageSize: 10,
     page: currentPage,
   };
 

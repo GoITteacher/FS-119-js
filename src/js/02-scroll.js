@@ -1,119 +1,81 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
-import { fetchArticles } from './modules/newsAPI2.js';
-import { articlesTemplate } from './templates/render-function2.js';
+import { fetchNews } from './modules/newsAPI';
+import { articlesTemplate } from './templates/render-function1';
 
 const refs = {
-  formElem: document.querySelector('.js-search-form'),
-  articleListElem: document.querySelector('.js-article-list'),
-  targetElem: document.querySelector('.js-target'),
-  loadElem: document.querySelector('.js-loader'),
+  formEl: document.querySelector('.js-search-form'),
+  ulEl: document.querySelector('.js-article-list'),
+  targetEl: document.querySelector('.js-target'),
+  loaderEl: document.querySelector('.js-loader'),
 };
+//!======================================================
 
-// ======================================
-let query;
-let page;
+let userValue;
+let currentPage;
 let maxPage;
+const PAGE_SIZE = 10;
+const observer = new IntersectionObserver(handleObserver, {
+  rootMargin: '1500px',
+  threshold: 0,
+});
 
-refs.formElem.addEventListener('submit', onFormSubmit);
+//!======================================================
 
-// ======================================
-
-async function onFormSubmit(e) {
+refs.formEl.addEventListener('submit', async e => {
   e.preventDefault();
-  query = e.target.elements.query.value.trim();
-  page = 1;
 
-  if (!query) {
-    showError('Empty field');
-    return;
-  }
+  userValue = e.target.elements.query.value;
+  currentPage = 1;
 
   showLoader();
+  const result = await fetchNews(userValue, currentPage);
+  const markup = articlesTemplate(result.articles);
+  refs.ulEl.innerHTML = markup;
 
-  try {
-    const data = await fetchArticles(query, page);
-    if (data.totalResults === 0) {
-      showError('Sorry!');
-    }
-    maxPage = data.total_pages;
-    refs.articleListElem.innerHTML = '';
-    renderArticles(data.articles);
-  } catch (err) {
-    showError(err);
-  }
+  maxPage = Math.ceil(result.totalResults / PAGE_SIZE);
+  updateObserverStatus();
 
   hideLoader();
-  checkObserverStatus();
   e.target.reset();
-}
+});
 
-async function onLoadMore() {
-  page += 1;
+//!======================================================
+
+async function loadMore() {
+  currentPage += 1;
+  updateObserverStatus();
   showLoader();
-  const data = await fetchArticles(query, page);
-  renderArticles(data.articles);
+  const result = await fetchNews(userValue, currentPage);
+  const markup = articlesTemplate(result.articles);
+  refs.ulEl.insertAdjacentHTML('beforeend', markup);
   hideLoader();
-  checkObserverStatus();
-
-  scrollBy({
-    behavior: 'smooth',
-    top: 1000,
-  });
 }
 
-// ======================================
-function renderArticles(articles) {
-  const markup = articlesTemplate(articles);
-  refs.articleListElem.insertAdjacentHTML('beforeend', markup);
+//!======================================================
+
+function updateObserverStatus() {
+  if (currentPage < maxPage) {
+    console.log('ПОВІШАВ СПОСТЕРІГАЧА');
+
+    observer.observe(refs.targetEl);
+  } else {
+    console.log('ЗНЯВ СПОСТЕРІГАЧА');
+    observer.unobserve(refs.targetEl);
+  }
 }
 
-function observeTarget() {
-  console.log('observe');
-  observer.observe(refs.targetElem);
-}
-function unobserveTarget() {
-  console.log('unobserve');
-  observer.unobserve(refs.targetElem);
-}
+//!======================================================
 
 function showLoader() {
-  refs.loadElem.classList.remove('hidden');
+  refs.loaderEl.classList.remove('hidden');
 }
+
 function hideLoader() {
-  refs.loadElem.classList.add('hidden');
+  refs.loaderEl.classList.add('hidden');
 }
-
-function showError(msg) {
-  iziToast.error({
-    title: 'Error',
-    message: msg,
-  });
-}
-
-function checkObserverStatus() {
-  if (page >= maxPage) {
-    unobserveTarget();
-    showError('Sorry! The End!');
-  } else {
-    observeTarget();
+//!======================================================
+function handleObserver(entries, observer) {
+  const entry = entries[0];
+  if (entry.isIntersecting) {
+    loadMore();
   }
 }
-// ========================================
-
-const options = {
-  root: document.querySelector('#scrollArea'),
-  rootMargin: '0px',
-  threshold: 1.0,
-};
-
-const callback = function (entries, observer) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      onLoadMore();
-    }
-  });
-};
-
-const observer = new IntersectionObserver(callback, options);
