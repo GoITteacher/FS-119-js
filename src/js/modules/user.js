@@ -46,3 +46,5 @@ function renderUser({ email, address, phone, username, name, payment }) {
   </div>`;
   refs.userContainer.innerHTML = markup;
 }
+
+//!======================================================
